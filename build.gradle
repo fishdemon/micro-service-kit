@@ -1,0 +1,128 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'org.springframework.boot' version '2.2.5.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+}
+
+// set dependencies of all projects
+allprojects {
+    apply plugin: 'idea'
+    apply plugin: 'java'
+
+    group 'com.fishdemon.msk'
+    version '1.0'
+
+    sourceCompatibility = 1.8
+
+    repositories {
+        maven{ url 'https://maven.aliyun.com/repository/jcenter'}
+        maven{ url 'https://maven.aliyun.com/repository/gradle-plugin'}
+        maven{ url 'https://maven.aliyun.com/repository/public'}
+        mavenCentral()
+    }
+}
+
+// set dependencies of sub projects
+subprojects {
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    ext {
+        set('springBootAdminVersion', "2.2.1")
+        set('springCloudVersion', "Hoxton.SR3")
+    }
+
+    dependencies {
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+        runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+        testImplementation('org.springframework.boot:spring-boot-starter-test') {
+            exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        }
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "de.codecentric:spring-boot-admin-dependencies:${springBootAdminVersion}"
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+}
+
+project(':msk-eureka') {
+    dependencies {
+	    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
+        implementation 'de.codecentric:spring-boot-admin-starter-client'
+    }
+}
+
+project(':msk-boot-admin') {
+    dependencies {
+        implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+        implementation 'de.codecentric:spring-boot-admin-starter-server'
+        implementation 'de.codecentric:spring-boot-admin-server-ui'
+    }
+}
+
+project(':msk-config') {
+    dependencies {
+        implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+        implementation 'de.codecentric:spring-boot-admin-starter-client'
+        implementation 'org.springframework.cloud:spring-cloud-config-server'
+    }
+}
+
+project(':msk-gateway') {
+    dependencies {
+        implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+        implementation 'de.codecentric:spring-boot-admin-starter-client'
+        implementation 'org.springframework.cloud:spring-cloud-starter-config'
+        implementation 'org.springframework.cloud:spring-cloud-starter-netflix-zuul'
+        implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    }
+}
+
+project(':msk-auth') {
+    dependencies {
+        implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+        implementation 'de.codecentric:spring-boot-admin-starter-client'
+        implementation 'org.springframework.cloud:spring-cloud-starter-config'
+        implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+    }
+}
+
+project(':msk-consumer') {
+    dependencies {
+        implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+        implementation 'de.codecentric:spring-boot-admin-starter-client'
+        implementation 'org.springframework.cloud:spring-cloud-starter-config'
+        implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+    }
+}
+
+project(':msk-zipkin') {
+    ext {
+        set('zipkinVersion', "2.12.9")
+    }
+    dependencies {
+        implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+        implementation 'de.codecentric:spring-boot-admin-starter-client'
+        implementation 'org.springframework.cloud:spring-cloud-starter-config'
+        implementation ("io.zipkin.java:zipkin-server:${zipkinVersion}") {
+            exclude module: 'log4j-slf4j-impl'
+        }
+//        implementation "io.zipkin.java:zipkin-autoconfigure-ui:${zipkinVersion}"
+
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+    }
+}
+

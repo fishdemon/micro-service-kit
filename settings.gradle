@@ -1,0 +1,9 @@
+rootProject.name = 'micro-service-kit'
+include 'msk-eureka'
+include 'msk-config'
+include 'msk-boot-admin'
+include 'msk-zipkin'
+include 'msk-gateway'
+include 'msk-auth'
+include 'msk-consumer'
+
