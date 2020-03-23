@@ -6,4 +6,5 @@ include 'msk-zipkin'
 include 'msk-gateway'
 include 'msk-auth'
 include 'msk-consumer'
+include 'msk-provider'
 
