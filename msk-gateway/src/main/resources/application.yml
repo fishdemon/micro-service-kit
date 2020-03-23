@@ -5,7 +5,7 @@ eureka:
   client:
     service-url:
       # 注册服务到eureka上，记住这里要加上eureka-server的用户名和密码
-      defaultZone: http://eureka-server:8761/eureka
+      defaultZone: http://eureka1:8761/eureka
 
 spring:
   application:
@@ -14,14 +14,13 @@ spring:
     active: native
   cloud:
     config:
-      uri: http://config-server:8888
+      # uri: http://config-server:8888
       name: application-zuul
       profile: pro
       # label:
-  boot:
-    admin:
-      client:
-        url: http://admin-server:8800/admin
+      discovery:
+        enabled: true
+        serviceId: config-server
 
 zuul:
   routes:
@@ -32,13 +31,18 @@ zuul:
       stripPrefix: false
     msk-auth:
       sensitiveHeaders: "*"
-      path: /auth
+      path: /auth/**
       service-id: msk-auth
       stripPrefix: false
     msk-consumer:
       sensitiveHeaders: "*"
-      path: /consumer
+      path: /consumer/**
       service-id: msk-consumer
+      stripPrefix: false
+    msk-provider:
+      sensitiveHeaders: "*"
+      path: /provider/**
+      service-id: msk-provider
       stripPrefix: false
 
 management:
