@@ -14,7 +14,14 @@ eureka:
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka
   instance:
-    hostname: eureka1
+    # 强烈建议不要用 localhost，否则在分布式部署的时候一大堆坑
+    hostname: msk-eureka
+    # 租期更新时间间隔（默认30秒）
     lease-renewal-interval-in-seconds: 10
+    # 租期到期时间（默认90秒）
+    lease-expiration-duration-in-seconds: 30
   server:
-    wait-time-in-ms-when-sync-empty: 0
+    # 关闭自我保护(AP),默认是 true
+    enable-self-preservation: false
+    # 清理间隔，默认是 60 * 1000 ms
+    eviction-interval-timer-in-ms: 4000

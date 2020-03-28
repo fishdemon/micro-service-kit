@@ -1,0 +1,26 @@
+server:
+  port: 8765
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://msk-eureka:8761/eureka
+      
+spring:
+  application:
+    name: msk-gateway
+  profiles:
+    active: native
+  cloud:
+    config:
+      # 配置文件的前缀名
+      name: application-gateway
+      # 配置文件的环境标识, dev/test/prod
+      profile: prod
+      # label:  # 配置仓库的分支， 这里是本地读取，可不配置
+      discovery:
+        enabled: true
+        serviceId: msk-config

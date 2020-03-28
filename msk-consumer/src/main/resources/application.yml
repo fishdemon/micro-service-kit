@@ -1,12 +1,23 @@
 server:
-  port: 8780
+  port: 8782
+  servlet:
+    context-path: /consumer
 
 eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
   client:
     service-url:
-      # 注册服务到eureka上，记住这里要加上 eureka-server 的用户名和密码
-      defaultZone: http://eureka1:8761/eureka
+      defaultZone: http://msk-eureka:8761/eureka
+
+feign:
+  hystrix:
+    # 开启Feign的Hystrix熔断器支持
+    enabled: true
 
 spring:
   application:
     name: msk-consumer
+  zipkin:
+    base-url: http://localhost:9411

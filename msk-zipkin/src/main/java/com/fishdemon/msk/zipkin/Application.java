@@ -3,7 +3,7 @@ package com.fishdemon.msk.zipkin;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import zipkin2.server.internal.EnableZipkinServer;
+import zipkin.server.internal.EnableZipkinServer;
 
 /**
  * zipkin Server

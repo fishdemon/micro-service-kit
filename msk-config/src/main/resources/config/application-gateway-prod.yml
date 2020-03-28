@@ -1,33 +1,12 @@
 server:
   port: 8765
 
-eureka:
-  client:
-    service-url:
-      # 注册服务到eureka上，记住这里要加上eureka-server的用户名和密码
-      defaultZone: http://eureka1:8761/eureka
-
-spring:
-  application:
-    name: msk-gateway
-  profiles:
-    active: native
-  cloud:
-    config:
-      # uri: http://config-server:8888
-      name: application-zuul
-      profile: pro
-      # label:
-      discovery:
-        enabled: true
-        serviceId: config-server
-
 zuul:
   routes:
     admin-server:
       sensitiveHeaders: "*"
       path: /admin/**
-      service-id: admin-server
+      service-id: msk-boot-admin
       stripPrefix: false
     msk-auth:
       sensitiveHeaders: "*"
@@ -58,6 +37,9 @@ management:
       exposure:
         include:
           - '*'
+spring:
+  zipkin:
+    base-url: http://localhost:9411
 
 logging:
   level:
