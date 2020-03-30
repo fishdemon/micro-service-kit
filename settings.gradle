@@ -7,4 +7,5 @@ include 'msk-gateway'
 include 'msk-auth'
 include 'msk-consumer'
 include 'msk-provider'
+include 'msk-vip'
 

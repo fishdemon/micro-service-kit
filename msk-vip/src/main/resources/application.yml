@@ -1,0 +1,28 @@
+server:
+  port: 8783
+  servlet:
+    context-path: /vip
+
+eureka:
+  instance:
+    # 强制使用IP地址进行注册
+    prefer-ip-address: true
+    # 设置客户端实例id, 若使用IP地址注册，这个配置必须有，否则会显示成 localhost
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    service-url:
+      # 注册服务到eureka上
+      defaultZone: http://msk-eureka:8761/eureka
+
+spring:
+  application:
+    name: msk-vip
+  zipkin:
+    base-url: http://localhost:9411
+
+security:
+  oauth2:
+    resource:
+      id: msk-vip
+      user-info-uri: http://msk-gateway/auth/api/member
+      prefer-token-info: false
