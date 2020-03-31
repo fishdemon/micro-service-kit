@@ -58,6 +58,7 @@ spring:
 logging:
   level:
     com.delta.roma.gateway: INFO
+    com.netflix.loadbalancer: DEBUG
 
 #---------------------OAuth2---------------------
 security:

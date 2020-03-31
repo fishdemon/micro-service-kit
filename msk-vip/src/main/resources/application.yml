@@ -24,5 +24,29 @@ security:
   oauth2:
     resource:
       id: msk-vip
-      user-info-uri: http://msk-gateway/auth/api/member
+      user-info-uri: http://msk-auth/auth/api/member
       prefer-token-info: false
+      loadBalanced: true
+
+#----------------------超时配置-------------------
+ribbon:
+  ReadTimeout: 3000
+  ConnectTimeout: 3000
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 2
+  eureka:
+    enabled: true
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3500
+
+logging:
+  level:
+    com.delta.roma: INFO
+    com.netflix.loadbalancer: DEBUG

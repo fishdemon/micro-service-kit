@@ -27,7 +27,7 @@ spring:
         min-idle: 0
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/eshop_member?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true
+    url: jdbc:mysql://127.0.0.1:3306/eshop_member?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&serverTimezone=UTC
     username: root
     password: 123456
   druid:
@@ -57,3 +57,9 @@ mybatis:
     call-setters-on-nulls: true #map空列不显示问题
   mapper-locations:
     - classpath:mybatis/*.xml
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
