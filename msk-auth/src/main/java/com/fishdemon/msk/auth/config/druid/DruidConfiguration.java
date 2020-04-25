@@ -13,13 +13,6 @@ import org.springframework.context.annotation.Primary;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
-/**
- * 〈druid连接池配置〉
- *
- * @author Curise
- * @create 2018/12/13
- * @since 1.0.0
- */
 @Configuration
 public class DruidConfiguration {
 

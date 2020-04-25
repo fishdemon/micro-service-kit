@@ -16,13 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * 〈自定义UserDetailService〉
- *
- * @author Curise
- * @create 2018/12/13
- * @since 1.0.0
- */
+
 @Service("userDetailService")
 public class MyUserDetailService implements UserDetailsService {
 

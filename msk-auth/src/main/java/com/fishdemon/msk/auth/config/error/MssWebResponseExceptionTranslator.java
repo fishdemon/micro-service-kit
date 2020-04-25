@@ -15,13 +15,7 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 
 import java.io.IOException;
 
-/**
- * 〈异常翻译〉
- *
- * @author Curise
- * @create 2018/12/13
- * @since 1.0.0
- */
+
 public class MssWebResponseExceptionTranslator implements WebResponseExceptionTranslator {
     private ThrowableAnalyzer throwableAnalyzer = new DefaultThrowableAnalyzer();
 

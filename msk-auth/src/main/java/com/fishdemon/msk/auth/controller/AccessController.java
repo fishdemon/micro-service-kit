@@ -9,16 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
-/**
- * 〈会员Controller〉
- *
- * @author Curise
- * @create 2018/12/13
- * @since 1.0.0
- */
 @RestController
 @RequestMapping("/api")
-public class MemberController {
+public class AccessController {
 
     @Autowired
     private MyUserDetailService userDetailService;
@@ -26,9 +19,9 @@ public class MemberController {
     @Autowired
     private ConsumerTokenServices consumerTokenServices;
 
-    @GetMapping("/member")
-    public Principal user(Principal member) {
-        return member;
+    @GetMapping("/user/current")
+    public Principal user(Principal user) {
+        return user;
     }
 
     @DeleteMapping(value = "/exit")

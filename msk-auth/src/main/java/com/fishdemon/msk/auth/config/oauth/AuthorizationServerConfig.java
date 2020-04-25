@@ -22,13 +22,7 @@ import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
 import javax.sql.DataSource;
 
-/**
- * 〈OAuth2认证服务器〉
- *
- * @author Curise
- * @create 2018/12/13
- * @since 1.0.0
- */
+
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
@@ -44,17 +38,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Autowired
     private MyUserDetailService userDetailService;
-
-    @Bean
-    public TokenStore tokenStore() {
-        return new RedisTokenStore(redisConnectionFactory);
-    }
-
-    @Primary
-    @Bean
-    public TokenStore jdbcTokenStore(){
-        return new JdbcTokenStore(dataSource);
-    }
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
@@ -72,23 +55,18 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .scopes("read")
                 .secret("android")
                 .authorizedGrantTypes("password", "authorization_code", "refresh_token")
+                .redirectUris("http://example.com")
                 .and()
                 .withClient("webapp")
                 .scopes("read")
-                .authorizedGrantTypes("implicit")
+                .secret("123456")
+                .authorizedGrantTypes("implicit","authorization_code", "password", "refresh_token")
+                .autoApprove(true)
+                .redirectUris("http://localhost:8765/login", "http://localhost:8765/auth/test")
                 .and()
                 .withClient("browser")
                 .authorizedGrantTypes("refresh_token", "password")
                 .scopes("read");
-    }
-    @Bean
-    public ClientDetailsService clientDetails() {
-        return new JdbcClientDetailsService(dataSource);
-    }
-
-    @Bean
-    public WebResponseExceptionTranslator webResponseExceptionTranslator(){
-        return new MssWebResponseExceptionTranslator();
     }
 
     @Override
@@ -98,7 +76,17 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .authenticationManager(authenticationManager);
         endpoints.tokenServices(defaultTokenServices());
         //认证异常翻译
-       // endpoints.exceptionTranslator(webResponseExceptionTranslator());
+        // endpoints.exceptionTranslator(webResponseExceptionTranslator());
+    }
+
+    @Bean
+    public ClientDetailsService clientDetails() {
+        return new JdbcClientDetailsService(dataSource);
+    }
+
+    @Bean
+    public WebResponseExceptionTranslator webResponseExceptionTranslator(){
+        return new MssWebResponseExceptionTranslator();
     }
 
     /**
@@ -117,4 +105,16 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         tokenServices.setRefreshTokenValiditySeconds(60 * 60 * 24 * 7);
         return tokenServices;
     }
+
+    @Bean
+    public TokenStore tokenStore() {
+        return new RedisTokenStore(redisConnectionFactory);
+    }
+
+    @Primary
+    @Bean
+    public TokenStore jdbcTokenStore(){
+        return new JdbcTokenStore(dataSource);
+    }
+
 }

@@ -1,7 +1,7 @@
 server:
-  port: 8783
+  port: 8784
   servlet:
-    context-path: /vip
+    context-path: /order/api
 
 eureka:
   instance:
@@ -16,14 +16,14 @@ eureka:
 
 spring:
   application:
-    name: msk-vip
+    name: msk-order
   zipkin:
     base-url: http://localhost:9411
 
 security:
   oauth2:
     resource:
-      id: msk-vip
+      id: msk-order
       user-info-uri: http://msk-auth/auth/api/user/current
       prefer-token-info: false
       loadBalanced: true

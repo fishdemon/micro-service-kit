@@ -34,7 +34,7 @@ subprojects {
     }
 
     dependencies {
-        implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
+        //implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
         compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
         runtimeOnly 'org.springframework.boot:spring-boot-devtools'
@@ -108,6 +108,18 @@ project(':msk-auth') {
 }
 
 project(':msk-vip') {
+    dependencies {
+        implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+        implementation 'org.springframework.boot:spring-boot-starter-actuator'
+//        implementation 'org.springframework.cloud:spring-cloud-starter-config'
+        implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+        implementation 'org.springframework.cloud:spring-cloud-starter-security'
+        implementation 'org.springframework.cloud:spring-cloud-starter-oauth2'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+    }
+}
+
+project(':msk-order') {
     dependencies {
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
         implementation 'org.springframework.boot:spring-boot-starter-actuator'

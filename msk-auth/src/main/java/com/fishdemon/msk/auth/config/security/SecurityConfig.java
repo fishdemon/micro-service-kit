@@ -13,16 +13,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-/**
- * 〈security配置〉
- *
- * @author Curise
- * @create 2018/12/13
- * @since 1.0.0
- */
+
 @Configuration
 @EnableWebSecurity
-@Order(2)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private MyUserDetailService userDetailService;
@@ -36,18 +29,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-//            .authorizeRequests()
-//            .antMatchers( "/actuator/**", "/oauth/**")
-//            .permitAll()
-//            .anyRequest()
-//            .authenticated()
-//            .and().formLogin().permitAll()
-//            .and()
-//            .csrf().disable();
-                .requestMatchers().antMatchers("/oauth/**")
-                .and()
                 .authorizeRequests()
-                .antMatchers("/oauth/**").authenticated()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
                 .and()
                 .csrf().disable();
     }

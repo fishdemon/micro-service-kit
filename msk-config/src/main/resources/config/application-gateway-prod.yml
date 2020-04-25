@@ -28,6 +28,15 @@ zuul:
       path: /vip/**
       service-id: msk-vip
       stripPrefix: false
+    msk-order:
+      sensitiveHeaders: "*"
+      path: /order/**
+      service-id: msk-order
+      stripPrefix: false
+    user:
+      sensitiveHeaders: "*"
+      path: /user/**
+      url: http://localhost:${server.port}/auth/api/member
   retryable: false
   ignored-services: "*"
   ribbon:
@@ -58,18 +67,23 @@ spring:
 logging:
   level:
     com.delta.roma.gateway: INFO
-    com.netflix.loadbalancer: DEBUG
+    com.netflix.loadbalancer: INFO
+    org.springframework.security: DEBUG
 
 #---------------------OAuth2---------------------
 security:
   oauth2:
     client:
-      access-token-uri: http://localhost:${server.port}/auth/oauth/token
-      user-authorization-uri: http://localhost:${server.port}/auth/oauth/authorize
-      client-id: web
+      access-token-uri: http://localhost:8780/auth/oauth/token
+      user-authorization-uri: http://localhost:8780/auth/oauth/authorize
+      client-id: webapp
+      client-secret: 123456
+      grant-type: password
     resource:
-      user-info-uri:  http://localhost:${server.port}/auth/api/member
+      user-info-uri:  http://msk-auth/auth/api/user/current
       prefer-token-info: false
+      loadBalanced: true
+
 #----------------------超时配置-------------------
 ribbon:
   ReadTimeout: 3000
