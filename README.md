@@ -38,7 +38,7 @@
 | Swagger2 | 2.9.2 |
 
 ## 软件架构
-![微服务架构图解](doc/img/msk-architecture.jpg)
+![微服务架构图解](https://github.com/fishdemon/micro-service-kit/tree/master/doc/img/msk-architecture.jpg)
 
 
 ## 模块说明
@@ -89,7 +89,7 @@ git clone git@github.com:fishdemon/micro-service-kit.git
 http://localhost:8761/
 ```
 
-![Eureka 管理页面](doc/img/eureka-manage.jpg)
+![Eureka 管理页面](https://github.com/fishdemon/micro-service-kit/tree/master/doc/img/eureka-manage.jpg)
 
 - Spring boot Admin 监控页面
 
@@ -97,7 +97,7 @@ http://localhost:8761/
 http://localhost:8766/admin/wallboard
 ```
 
-![Spring boot admin 管理页面](doc/img/boot-admin-manage.jpg)
+![Spring boot admin 管理页面](https://github.com/fishdemon/micro-service-kit/tree/master/doc/img/boot-admin-manage.jpg)
 
 ## 联系
 
