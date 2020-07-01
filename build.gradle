@@ -34,10 +34,13 @@ subprojects {
     }
 
     dependencies {
-        implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
+//        implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
         compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
         runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+
+        testCompileOnly 'org.projectlombok:lombok'
+        testAnnotationProcessor 'org.projectlombok:lombok'
         testImplementation('org.springframework.boot:spring-boot-starter-test') {
             exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
         }
@@ -90,11 +93,29 @@ project(':msk-gateway') {
 
 project(':msk-auth') {
     dependencies {
+        // cloud
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
         implementation 'org.springframework.boot:spring-boot-starter-actuator'
-        implementation 'org.springframework.cloud:spring-cloud-starter-config'
+//        implementation 'org.springframework.cloud:spring-cloud-starter-config'
         implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+        // mvc
         implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter-security'
+        implementation 'org.springframework.security:spring-security-jwt:1.0.10.RELEASE'
+        // swagger
+        implementation 'io.springfox:springfox-swagger2:2.4.0'
+        implementation 'io.springfox:springfox-swagger-ui:2.4.0'
+        implementation 'com.github.xiaoymin:swagger-bootstrap-ui:1.9.6'
+        // hutool
+        implementation 'cn.hutool:hutool-all:5.2.5'
+        // mybatis plus
+        implementation 'com.baomidou:mybatis-plus-boot-starter:3.2.0'
+        implementation 'org.freemarker:freemarker:2.3.29'
+        implementation 'com.baomidou:mybatis-plus-generator:3.2.0'
+        // mysql
+        runtimeOnly 'mysql:mysql-connector-java'
+        // ip
+        implementation 'org.lionsoul:ip2region:1.7.2'
     }
 }
 

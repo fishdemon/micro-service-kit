@@ -1,5 +1,7 @@
 server:
   port: 8780
+  servlet:
+    context-path: /
 
 eureka:
   client:
@@ -10,3 +12,54 @@ eureka:
 spring:
   application:
     name: msk-auth
+  devtools:
+    restart:
+      enabled: true
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 10MB
+  jackson:
+    date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+    time-zone: GMT+8
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/msk-auth?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+    hikari:
+      max-lifetime: 600000
+      idle-timeout: 300000
+      minimum-idle: 5
+      maximum-pool-size: 50
+
+# mybatis plus config
+mybatis-plus:
+  mapper-locations: classpath*:com/fishdemon/**/mapper/xml/*.xml
+  global-config:
+    # id-type: 0
+    db-config:
+      logic-delete-value: 0 # deleted
+      logic-not-delete-value: 1
+  configuration:
+    map-underscore-to-camel-case: true
+
+#日志级别的配置
+logging:
+  file: log/msk-auth.log
+  file.max-history: 30
+  file.max-size: 10MB
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%t]){faint} %clr(%-40.40logger{39}.%M\\(%line\\)){cyan}   %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39}.%M\\(%line\\): %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}"
+  level:
+    root: WARN
+    com:
+      fishdemon:
+        msk:
+          auth: debug
+    org.springframework:
+      boot:
+        web:
+          embedded:
+            tomcat: info

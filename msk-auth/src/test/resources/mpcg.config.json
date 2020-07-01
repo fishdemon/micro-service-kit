@@ -1,0 +1,59 @@
+{
+	"dataSource": {
+		"driverName": "com.mysql.jdbc.Driver",
+		"url": "jdbc:mysql://localhost:3306/msk-auth?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai",
+		"username": "root",
+		"password": "123456"
+	},
+	
+	"strategy": {
+		"exclude": [],
+		"tablePrefix": ["sys_"],
+	    "logicDeleteFieldName": "deleted",
+	    
+	    "naming": "underline_to_camel",
+	    "columnNaming": "underline_to_camel",
+	    "isCapitalMode": true, 
+	    "skipView": false,
+	    
+	    "entityLombokModel": true,
+	    "entityBuilderModel": true,
+	    "entitySerialVersionUID": true,
+	    "entityTableFieldAnnotationEnable": false,
+	    "entityBooleanColumnRemoveIsPrefix": true,
+	    "entityColumnConstant": false,
+	    
+	    "restControllerStyle": true,
+	    "controllerMappingHyphenStyle": false
+	},
+	
+	"globalConfig": {
+		"outputDir": "D://src",
+	    "activeRecord": false,
+	    "dateType": "ONLY_DATE",
+	    "baseResultMap": false,
+	    "author": "Anjin.Ma",
+	    "swagger2": true,
+	    "baseColumnList": false,
+	    "fileOverride": true,
+	    "serviceName": "%sService",
+	    "enableCache": false,
+	    "open": false
+	},
+	
+	"packageInfo": {
+		"parent": "com.fishdemon.msk",
+		"moduleName": "auth"
+	},
+	
+	"templates": {
+		"controller": "",
+	    "service": "/templates/service.java",
+	    "serviceImpl": "/templates/serviceImpl.java",
+	    "mapper": "/templates/mapper.java",
+	    "xml": "/templates/mapper.xml",
+	    "entity": "/templates/entity.java",
+	    "entityKt": "/templates/entity.kt"
+	}
+	
+}
