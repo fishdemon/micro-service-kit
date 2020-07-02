@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
+ * 本地缓存用户登录信息
  * @author Anjin.Ma
  * @description AuthorityCache
  * @date 2020/6/30

@@ -7,8 +7,8 @@ import org.springframework.security.jwt.crypto.sign.RsaSigner;
 import org.springframework.security.jwt.crypto.sign.RsaVerifier;
 
 /**
- * @author niXueChao
- * @date 2019/3/29 14:30.
+ * @author Anjin.Ma
+ * @date 2020-6-30
  */
 @Configuration
 public class JwtKeyConfig {

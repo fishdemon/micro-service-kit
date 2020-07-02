@@ -3,16 +3,14 @@ package com.fishdemon.msk.auth.service.impl;
 import com.fishdemon.msk.auth.entity.User;
 import com.fishdemon.msk.auth.mapper.UserMapper;
 import com.fishdemon.msk.auth.security.SecurityUser;
+import com.fishdemon.msk.auth.security.config.ApiGrantedAuthority;
 import com.fishdemon.msk.auth.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * <p>
@@ -29,24 +27,25 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public Set<String> getPermissionsByUserId(int userId) {
+    public List<ApiGrantedAuthority> getPermissionsByUserId(int userId) {
         switch (userId) {
             case 1 :
-                Set<String> permissions = new HashSet<>(Arrays.asList("","",""));
+                List<ApiGrantedAuthority> permissions = new ArrayList<>();
+                permissions.add(new ApiGrantedAuthority("GET","/test"));
                 return permissions;
             default:
-                return new HashSet<>();
+                return new ArrayList<>();
         }
     }
 
     @Override
-    public Set<String> getRolesByUserId(int userId) {
+    public List<String> getRolesByUserId(int userId) {
         switch (userId) {
             case 1 :
-                Set<String> roles = new HashSet<>(Arrays.asList("admin"));
+                List<String> roles = new ArrayList<>(Arrays.asList("ROLE_ADMIN"));
                 return roles;
             default:
-                return new HashSet<>();
+                return new ArrayList<>();
         }
     }
 

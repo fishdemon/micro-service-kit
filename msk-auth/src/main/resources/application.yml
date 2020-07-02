@@ -54,12 +54,8 @@ logging:
     file: "%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39}.%M\\(%line\\): %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}"
   level:
     root: WARN
-    com:
-      fishdemon:
-        msk:
-          auth: debug
+    com.fishdemon.msk.auth: debug
     org.springframework:
+      security: info
       boot:
-        web:
-          embedded:
-            tomcat: info
+        web.embedded.tomcat: info

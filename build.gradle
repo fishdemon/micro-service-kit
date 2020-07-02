@@ -94,13 +94,14 @@ project(':msk-gateway') {
 project(':msk-auth') {
     dependencies {
         // cloud
-        implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-        implementation 'org.springframework.boot:spring-boot-starter-actuator'
+//        implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+//        implementation 'org.springframework.boot:spring-boot-starter-actuator'
 //        implementation 'org.springframework.cloud:spring-cloud-starter-config'
-        implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+//        implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
         // mvc
         implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'org.springframework.boot:spring-boot-starter-security'
+        implementation 'org.springframework.boot:spring-boot-starter-aop'
         implementation 'org.springframework.security:spring-security-jwt:1.0.10.RELEASE'
         // swagger
         implementation 'io.springfox:springfox-swagger2:2.4.0'
@@ -116,6 +117,7 @@ project(':msk-auth') {
         runtimeOnly 'mysql:mysql-connector-java'
         // ip
         implementation 'org.lionsoul:ip2region:1.7.2'
+        implementation 'commons-io:commons-io:2.7'
     }
 }
 

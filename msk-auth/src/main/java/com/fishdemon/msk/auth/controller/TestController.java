@@ -13,7 +13,7 @@ public class TestController {
 
     @GetMapping
     @OperateLog(descrption = "test")
-    @PreAuthorize("hasAuthority('sys:dict:add')")
+//    @PreAuthorize("hasAuthority('sys:dict:add')")
     public ApiResult test() {
         return ApiResult.ok("test");
     }

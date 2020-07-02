@@ -2,11 +2,10 @@ package com.fishdemon.msk.auth.security.service;
 
 import cn.hutool.json.JSONUtil;
 import com.fishdemon.msk.auth.security.SecurityUser;
+import com.fishdemon.msk.auth.security.config.ApiGrantedAuthority;
 import com.fishdemon.msk.auth.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -36,23 +35,21 @@ public class AppUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("登录用户：" + username + " 不存在");
         }
 
-        Collection<? extends GrantedAuthority> authorities = getAuthorities(user.getUserId());
+        List<ApiGrantedAuthority> authorities = getAuthorities(user.getUserId());
         user.setAuthorities(authorities);
 
         log.debug(JSONUtil.toJsonStr(user));
         return user;
     }
 
-    private Collection<? extends GrantedAuthority> getAuthorities(int userId) {
+    private List<ApiGrantedAuthority>  getAuthorities(int userId) {
         // 获取用户的所有权限
-        Set<String> permissions = userService.getPermissionsByUserId(userId);
+        List<ApiGrantedAuthority> permissions = userService.getPermissionsByUserId(userId);
         // 获取用户的所有角色
-        Set<String> roles = userService.getRolesByUserId(userId);
+//        List<String> roles = userService.getRolesByUserId(userId);
         // 集合所有的权限及集合
-        permissions.addAll(roles);
-        permissions.remove("");
-        Collection<? extends GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(permissions.toArray(new String[0]));
-        return authorities;
+//        Collection<? extends GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(permissions.toArray(new String[0]));
+        return permissions;
     }
 
 }

@@ -38,11 +38,12 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
         response.setContentType("application/json;charset=UTF-8");
         SecurityUser user = (SecurityUser) authentication.getPrincipal();
 
+        // 构建 jwt token 中的资料
         SecurityUser tokenUser = new SecurityUser();
         tokenUser.setUserId(user.getUserId());
         tokenUser.setUsername(user.getUsername());
         tokenUser.setExpiration(new Date(new Date().getTime() + expirationTime));
-        // 构建 jwt token 中的资料
+        tokenUser.setAuthorities(user.getAuthorities());
         String userJsonStr = JSONUtil.toJsonStr(tokenUser);
         String token = JwtHelper.encode(userJsonStr, signer).getEncoded();
         //签发token

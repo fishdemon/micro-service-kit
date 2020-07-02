@@ -1,13 +1,13 @@
 package com.fishdemon.msk.auth.security;
 
+import com.fishdemon.msk.auth.security.config.ApiGrantedAuthority;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Anjin.Ma
@@ -24,14 +24,14 @@ public class SecurityUser implements UserDetails {
     private Integer userId;
     private String username;
     private String password;
-    private Collection<? extends GrantedAuthority> authorities;
+    private List<ApiGrantedAuthority> authorities;
     private Date expiration;
 
     public  SecurityUser() {
 
     }
 
-    public SecurityUser(Integer userId, String username, String password, Collection<? extends GrantedAuthority> authorities, LoginType loginType) {
+    public SecurityUser(Integer userId, String username, String password, List<ApiGrantedAuthority> authorities, LoginType loginType) {
         this.userId = userId;
         this.username = username;
         this.password = password;
@@ -44,7 +44,7 @@ public class SecurityUser implements UserDetails {
      * @return
      */
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    public List<ApiGrantedAuthority> getAuthorities() {
         return authorities;
     }
 
@@ -82,5 +82,9 @@ public class SecurityUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public void setAuthorities(List<ApiGrantedAuthority> authorities) {
+        this.authorities = authorities;
     }
 }
